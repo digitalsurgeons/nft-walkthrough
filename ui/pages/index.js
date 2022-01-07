@@ -12,6 +12,7 @@ export default function Home() {
   const [nftMinted, setNftMinted] = useState(false)
   const [raribleLink, setRaribleLink] = useState(null)
   const [openSeaLink, setOpenSeaLink] = useState(null)
+  const [etherScanLink, setEtherScanLink] = useState(null)
 
   const checkWalletIsConnected = async () => {
     const { ethereum } = window
@@ -82,6 +83,7 @@ export default function Home() {
     setOpenSeaLink(
       `https://testnets.opensea.io/${currentAccount}?search[sortBy]=CREATED_DATE&search[sortAscending]=false`
     )
+    setEtherScanLink(`https://rinkeby.etherscan.io/tx/${data.hash}`)
   }
 
   return (
@@ -147,11 +149,21 @@ export default function Home() {
             cupidatat duis aute.
           </p>
           {nftMinted ? (
-            <p>NFT Succesfully Minted!</p>
+            <p style={{ marginTop: 30 }}>
+              <span style={{ marginRight: 5 }}>✅</span> NFT Succesfully Minted!
+            </p>
           ) : (
             <button onClick={mintNFT} className={styles.button}>
               Click here to mint your first NFT
             </button>
+          )}
+          {etherScanLink && (
+            <p>
+              <a href={etherScanLink} target="_blank" rel="noreferrer">
+                View transaction on Etherscan
+              </a>
+              .
+            </p>
           )}
           {openSeaLink && (
             <p>
