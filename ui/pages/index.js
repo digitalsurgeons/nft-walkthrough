@@ -51,10 +51,10 @@ export default function Home() {
   const fetchUserInfo = async (accounts) => {
     const account = accounts[0]
     const provider = new ethers.providers.Web3Provider(ethereum)
-    const balance = await provider.getBalance('ethers.eth')
+    const balance = await provider.getBalance(account)
 
     setCurrentAccount(account)
-    setCurrentBalance(ethers.utils.formatEther(balance))
+    setCurrentBalance(parseFloat(ethers.utils.formatEther(balance)).toFixed(4))
 
     console.log('Found an authorized account: ', account)
     console.log('Current balance: ', balance)
